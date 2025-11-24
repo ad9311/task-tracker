@@ -9,7 +9,7 @@ Rails API for tasks plus a Vite/React client.
 
 ## Clone the repo
 ```
-git clone <your fork url>/task-tracker.git
+git clone https://github.com/ad9311/task-tracker.git
 cd task-tracker
 ```
 Then follow the backend and frontend setup steps below. Run the Rails API first so the React app can reach `http://127.0.0.1:3000`.
