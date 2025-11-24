@@ -88,7 +88,7 @@ export default function TaskList() {
   const mergedTasks = [...state.tasks, ...tasks];
 
   const mappedTasks = mergedTasks.map(t => (
-    <li key={t.id}>
+    <li key={t.id} data-testid="task-item">
       <div className="inner-div">
         <p>{t.description}</p>
         <div className="dates">
@@ -100,14 +100,14 @@ export default function TaskList() {
   ))
 
   return (
-    <div>
-      <form action={formAction}>
-        <input type="text" name="description" id="description" placeholder="Type here..." />
+    <div data-testid="task-list-container">
+      <form action={formAction} data-testid="task-form">
+        <input type="text" name="description" id="description" placeholder="Type here..." data-testid="task-input" />
         <br />
-        <button type="submit">Add Task</button>
+        <button type="submit" data-testid="task-submit">Add Task</button>
       </form>
-      { error || state.error ? <p className="error-message">{(error || state.error) }</p>: ''}
-      <ul>{mappedTasks}</ul>
+      { error || state.error ? <p className="error-message" data-testid="task-error">{(error || state.error) }</p>: ''}
+      <ul data-testid="task-list">{mappedTasks}</ul>
     </div>
   );
 }
