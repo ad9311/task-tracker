@@ -62,7 +62,8 @@ describe("TaskList", () => {
     render(<TaskList />);
     expect(await screen.findByText("Existing")).toBeInTheDocument();
 
-    await userEvent.type(screen.getByTestId("task-input"), "New");
+    const input = await screen.findByTestId("task-input");
+    await userEvent.type(input, "New");
     await userEvent.click(screen.getByTestId("task-submit"));
 
     await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(2));
@@ -87,7 +88,8 @@ describe("TaskList", () => {
 
     render(<TaskList />);
 
-    await userEvent.type(screen.getByTestId("task-input"), "Bad task");
+    const input = await screen.findByTestId("task-input");
+    await userEvent.type(input, "Bad task");
     await userEvent.click(screen.getByTestId("task-submit"));
 
     expect(await screen.findByTestId("task-error")).toHaveTextContent("failed to fetch tasks");
