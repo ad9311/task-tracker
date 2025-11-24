@@ -42,3 +42,10 @@ ul li p {
   color: red;
   font-weight: bold;
 }
+
+.loading-message {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  color: rgb(125, 129, 19);
+}

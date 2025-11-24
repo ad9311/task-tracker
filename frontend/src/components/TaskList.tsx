@@ -67,22 +67,25 @@ export default function TaskList() {
   const [state, formAction, isPending] = useActionState(newTask, initialState);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const load = async () => {
+      setIsLoading(true);
       try {
         const tasks = await fetchTasks();
         setTasks(tasks);
       } catch (error) {
         setError((error as Error).message);
       }
+      setIsLoading(false);
     };
 
     load();
   }, []);
 
-  if (isPending) {
-    return <p>Loading...</p>
+  if (isPending || isLoading) {
+    return <p className="loading-message">Loading...</p>
   }
 
   const mergedTasks = [...state.tasks, ...tasks];

@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
     tasks = Task.order(created_at: :desc)
+    sleep 1.5 if Rails.env.development? # Brief pause to show loading state on the backend.
 
     render json: tasks
   end
