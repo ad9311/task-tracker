@@ -8,4 +8,5 @@
 #  updated_at  :datetime         not null
 #
 class Task < ApplicationRecord
+  validates :description, presence: true
 end
