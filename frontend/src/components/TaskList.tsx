@@ -7,6 +7,15 @@ type Task = {
   updated_at: string;
 }
 
+type InitState = {
+  tasks: Task[];
+  error?: string;
+}
+
+const initialState: InitState = {
+  tasks: [],
+};
+
 const fetchTasks = async(): Promise<Task[]> => {
   const res = await fetch('http://127.0.0.1:3000/tasks');
   if (res.ok) {
@@ -37,22 +46,25 @@ const createTask = async (description: string): Promise<Task> => {
   throw new Error("failed to fetch tasks");
 }
 
-const newTask = async (previousState: Task[], formData: FormData) => {
+const newTask = async (previousState: InitState, formData: FormData): Promise<InitState> => {
   const description = formData.get("description");
 
   try {
     const task = await createTask(description?.toString() as string);
 
-    return [task, ...previousState];
+    return {
+      tasks: [task, ...previousState.tasks],
+    };
   } catch (error) {
-    // setError((error as Error).message);
+    return {
+      tasks: previousState.tasks,
+      error: (error as Error).message,
+    };
   }
-
-  return previousState;
 }
 
 export default function TaskList() {
-  const [state, formAction, isPending] = useActionState(newTask, []);
+  const [state, formAction, isPending] = useActionState(newTask, initialState);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState<string>("");
 
@@ -69,15 +81,15 @@ export default function TaskList() {
     load();
   }, []);
 
-  if (error) {
-    return <p>{error}</p>
+  if (error || state.error) {
+    return <p>{error || state.error}</p>
   }
 
   if (isPending) {
     return <p>Loading...</p>
   }
 
-  const mergedTasks = [...state, ...tasks];
+  const mergedTasks = [...state.tasks, ...tasks];
 
   const mappedTasks = mergedTasks.map(t => (
     <li key={t.id}>

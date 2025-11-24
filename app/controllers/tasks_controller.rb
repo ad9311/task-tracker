@@ -11,7 +11,7 @@ class TasksController < ApplicationController
       task.save
       render json: task
     else
-      render json: { error: task.errors.full_messages }
+      render json: { error: task.errors.full_messages }, status: 400
     end
   end
 
