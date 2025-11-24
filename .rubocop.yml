@@ -19,9 +19,6 @@ Style/TrailingCommaInHashLiteral:
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
-Layout/HashAlignment:
-  EnforcedStyle: key
-
 Layout/EmptyLineAfterGuardClause:
   Enabled: true
 
@@ -31,7 +28,7 @@ Layout/EmptyLinesAroundAttributeAccessor:
 Naming/MethodName:
   Enabled: true
 
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Enabled: true
 
 Naming/VariableNumber:
