@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
+  before_action :delay
+
   def index
     tasks = Task.order(created_at: :desc)
-    sleep 1.5 if Rails.env.development? # Brief pause to show loading state on the backend.
 
     render json: tasks
   end
@@ -24,5 +25,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:description)
+  end
+
+  def delay
+    sleep 1 if Rails.env.development? # Brief pause to show loading state on the backend.
   end
 end
