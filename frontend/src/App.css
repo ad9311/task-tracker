@@ -1,1 +1,44 @@
+form input {
+  padding: 0.5rem 1rem ;
+  border-radius: 1px;
+}
 
+form button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem ;
+  border-radius: 1px;
+}
+
+ul {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+ul li {
+  list-style: none;
+}
+
+.inner-div {
+  border: 1px;
+  border-color: rgb(121, 121, 121);
+}
+
+ul li p {
+  font-weight: bold;
+  margin: 0 0 0.15rem 0;
+}
+
+.dates {
+  display: flex;
+  gap: 1rem;
+  font-size: small;
+  color: rgb(121, 121, 121);
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}

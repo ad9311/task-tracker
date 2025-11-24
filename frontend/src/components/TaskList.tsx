@@ -81,10 +81,6 @@ export default function TaskList() {
     load();
   }, []);
 
-  if (error || state.error) {
-    return <p>{error || state.error}</p>
-  }
-
   if (isPending) {
     return <p>Loading...</p>
   }
@@ -93,10 +89,12 @@ export default function TaskList() {
 
   const mappedTasks = mergedTasks.map(t => (
     <li key={t.id}>
-      <p>{t.description}</p>
-      <div>
-        <p>Create at: {new Date(t.created_at).toDateString()}</p>
-        <p>Updated at: {new Date(t.updated_at).toDateString()}</p>
+      <div className="inner-div">
+        <p>{t.description}</p>
+        <div className="dates">
+          <p>Created at: {new Date(t.created_at).toDateString()}</p>
+          <p>Updated at: {new Date(t.updated_at).toDateString()}</p>
+        </div>
       </div>
     </li>
   ))
@@ -105,8 +103,10 @@ export default function TaskList() {
     <div>
       <form action={formAction}>
         <input type="text" name="description" id="description" placeholder="Type here..." />
+        <br />
         <button type="submit">Add Task</button>
       </form>
+      { error || state.error ? <p className="error-message">{(error || state.error) }</p>: ''}
       <ul>{mappedTasks}</ul>
     </div>
   );
